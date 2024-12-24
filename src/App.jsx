@@ -5,9 +5,11 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactForm from "./components/ContactForm/ContactForm";
 
 function App() {
-  const [contact, SetContact] = useState(() =>
-    JSON.parse(localStorage.getItem("saved-contact"))
-  );
+  const [contact, SetContact] = useState(() => {
+    const savedContact = JSON.parse(localStorage.getItem("saved-contact"));
+
+    return savedContact !== null ? savedContact : [];
+  });
 
   useEffect(() =>
     localStorage.setItem("saved-contact", JSON.stringify(contact))
